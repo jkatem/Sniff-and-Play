@@ -1,0 +1,16 @@
+<h1> Create Dog Profile </h1>
+
+<%= form_for @dog do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :age %>
+    <%= f.text_field :age %><br>
+    <%= f.label :breed %>
+    <%= f.text_field :breed %><br> 
+    <%= f.label :hobbies %>
+    <%= f.text_field :hobbies %><br> 
+    <%= f.label :bio %>
+    <%= f.text_field :bio %><br> 
+
+    <%= f.submit "SignUp"%>
+<% end %>

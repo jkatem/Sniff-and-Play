@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :dogs
+  resources :dogs, except: [:create, :update, :delete]
   resources :photos
-  resources :users
+  # resources :users
+
+  resources :users do 
+    resources :dogs, only: [:new, :show, :index, :edit]
+  end 
 
   root 'homepage#home'
 
@@ -11,5 +15,10 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   delete '/logout' => 'sessions#destroy'
 
-  get '/users/:id', to: 'users#show'
+  get '/users/:id/new', to: 'dog#create'
+
+  # get '/users/:id', to: 'users#show'
+
+# need nested resources if i want the path to go to creating your dog after signing up?? Do I want this only for when creating dog profile? 
+
 end

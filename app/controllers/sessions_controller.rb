@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
     
         if user && user.authenticate(session_params[:password])
           session[:user_id] = user.id
-          redirect_to user_path(user)
+          redirect_to user_path(user) # => maybe redirect to page to create dog profile? 
+          # redirect_to new_user_dog_path(user) 
+
         else
           redirect_to login_path
         end
