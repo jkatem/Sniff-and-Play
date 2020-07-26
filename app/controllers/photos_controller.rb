@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
     def index
-
+        @photos = Photo.all 
     end
     
     def new
@@ -43,6 +43,6 @@ class PhotosController < ApplicationController
     private
 
     def photo_params
-        params.require(:photo).require(:caption, :star, :dog_id)
+        params.require(:photo).require(:caption, :star, :images, :dog_id)
     end
 end

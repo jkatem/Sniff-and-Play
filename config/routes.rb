@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :comments
   # resources :dogs, except: [:create, :update, :delete]
 
-  # do i do a nested resource with dogs and photos? Can I?
   resources :photos
 
  

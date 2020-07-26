@@ -1,0 +1,1 @@
+  1. do i do a nested resource with dogs and photos? Can I?
