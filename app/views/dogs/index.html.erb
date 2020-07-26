@@ -1,1 +1,11 @@
-<h1> dog's index page </h1>
+
+
+    <% @dogs.each do |d|  %>
+        <p> 
+        <%= link_to d.name, dog_path(@dogs) %>
+        </p>
+    <%end %>
+<br>
+<br>
+
+<%= link_to 'Create your dog profile', new_dog_path(@dog) %>
