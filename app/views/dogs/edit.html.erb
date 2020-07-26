@@ -1,0 +1,21 @@
+<h1>Dog's edit page </h1>
+
+<%= form_for @dog do |f| %>
+    <%= f.label :Name %>
+    <%= f.text_field :name %>
+    <br>
+    <%= f.label :Age %>
+    <%= f.text_field :age %>
+    <br>
+    <%= f.label :Breed %>
+    <%= f.text_field :breed %>
+    <br>
+    <%= f.label :Hobbies %>
+    <%= f.text_field :hobbies %>
+    <br>
+    <%= f.label :Bio %>
+    <%= f.text_field :bio %>
+
+    <%= f.submit %>
+<br>
+<% end %>

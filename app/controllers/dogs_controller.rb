@@ -10,30 +10,44 @@ class DogsController < ApplicationController
     end
 
     def new
-        @dog = Dog.new            
+        if params[:user_id] && @user = User.find_by_id(params[:user_id])
+          @post = @user.posts.build
+        else
+          @post = Post.new
+        end
     end
 
-    def show   
-        @dog = Dog.find(params[:id])              
+    def show
+        @dog = Dog.find(params[:id])
     end
 
     def create
-        @dog = Dog.new(dog_params)
-        @dog.user = current_user
-        if @dog.save
-            redirect_to user_path(@dog) # = redirects to dogs index
-        else 
-            render 'new'
-        end
-        
+        @dog = current_user.dogs.build(dog_params)
+        # @dog.user = current_user
+        @dog.save
+           flash[:notice] = "Dog saved"
+           redirect_to dogs_path(@dog)
+           
+        # else
+            # render :new
+        # end
     end
 
     def edit
-
+        @dog = Dog.find(params[:id])
     end
 
-    def delete
+    def update
+        @dog = Dog.find(params[:id])
+        @dog.update(dog_params)
+        redirect_to dog_path(@dog)
+    end 
 
+
+    def destroy
+        @dog = Dog.find_by(params[:id])
+        @dog.destroy 
+        redirect_to user_path(current_user)
     end 
 
     private

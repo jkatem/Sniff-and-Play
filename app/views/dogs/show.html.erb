@@ -1,7 +1,22 @@
 
-<%= @dog.name %><br>
-<%= @dog.age %><br>
-<%= @dog.breed %><br>
-<%= @dog.hobbies %><br>
-<%= @dog.bio %><br> 
+<%# <% if @dog.empty? %> 
+    <%# <h1> Do something</h1> %>
+<%# <% else %> 
+
+Name: <%= @dog.name %>
+<br>
+Age: <%= @dog.age %>
+<br>
+Breed: <%= @dog.breed %>
+<br>
+Hobbies: <%= @dog.hobbies %>
+<br>
+Bio: <%= @dog.bio %>
+<br> 
+
+<%# <% end %>
+<%= link_to 'Edit', edit_dog_path(@dog) %>
+
+<%# <%= link_to 'Delete', dog_path(@dog), method: :delete %> 
+
 
