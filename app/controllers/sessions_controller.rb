@@ -20,7 +20,18 @@ class SessionsController < ApplicationController
       redirect_to '/'
   end
 
+  def omniauth 
+    # byebug
+    @user = User.from_omniauth(auth) # method called is from our user model 
+    
+    session[:user_id] = user.id
+    redirect_to login_path(user) 
+  end
+
   private
+  def auth
+    request.env['omniauth.auth']
+  end
 
   def session_params
     params.require('session').permit(:email, :password)
