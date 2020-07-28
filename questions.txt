@@ -1,1 +1,2 @@
-  1. do i do a nested resource with dogs and photos? Can I?
+1. Can I omit option to edit photos, and give option to delete. 
+  - No, don't need it. 

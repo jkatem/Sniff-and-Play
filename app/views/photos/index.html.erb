@@ -1,1 +1,26 @@
-<h1> List of photos of dog </h1>
+<h1> List of photos of <%= @dog.name %> </h1>
+<ul>
+  <% @photos.each do |photo| %>
+    <li>
+      <div>
+        <% if photo.image_file.attached? %>
+        <span style="color:#1c87c9"><%= photo.caption %></span> </p>
+          <%= image_tag(photo.image_file, width: 128) %>
+          <%= link_to "Delete Picture", dog_photos_path(@dog), method: :delete %>
+          <% else %>
+            "No Photo"
+        <% end %>
+      </div>
+    </li>
+              <%= link_to "Delete Picture", dog_photos_path(@dog), method: :delete %>
+
+  <% end %>
+</ul>
+<br>
+<% if @dog.photos.count < 5 %>
+  <%= link_to "Add More Photo", new_dog_photo_path(@dog) %> 
+<% end %>  
+<br> 
+<%= link_to "Done", dog_path(@dog) %> 
+
+

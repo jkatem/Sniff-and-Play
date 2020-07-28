@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2020_07_26_084047) do
     t.integer "dog_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "images"
     t.index ["dog_id"], name: "index_photos_on_dog_id"
   end
 

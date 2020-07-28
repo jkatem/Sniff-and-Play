@@ -1,35 +1,35 @@
 class PhotosController < ApplicationController
 
+    before_action :current_user
+    
     def index
-        @photos = Photo.all 
+        # byebug
+      @dog = Dog.find_by_id params[:dog_id]
+      if @dog 
+        @photos = @dog.photos  
+      end
     end
     
     def new
-        @photo = @dog.photos.new(photo_params)
-        @photo.dog = current_dog
-        # or can i do @photo.dog = current_user
-        @photo.save
-        redirect_to new_dog_photo(@photo)
+        @photo = Photo.new
     end
 
     def create
-        @photo = current_user.photos.build(photo_params) # do I have access to current_user?
-        if @photo.save
-            redirect_to photos_path(@photo) #photos index page
+        @photo = Photo.new(photo_params)
+        @photo.dog_id = params[:dog_id]
+        if @photo.save!
+            redirect_to dog_photos_path(current_dog)
         else
             render :new
         end
     end 
 
     def show
-        @photo = Photo.find_by_id(params[:id])
-        redirect_to dog_photo_path(@photo)
-        # page showing the photo newly created
+        @photo = current_dog.photos.find_by_id(params[:id])
     end
 
     def edit
-        @photo = Photo.find_by_id(params[:id])
-        @photo.update 
+
     end
     
     def update
@@ -37,12 +37,25 @@ class PhotosController < ApplicationController
     end
 
     def destroy
-
+        @dog = Dog.find_by_id params[:dog_id]
+        if @dog 
+            @dog.destroy
+            redirect_to dog_photos_path(@dog)
+        end 
     end
 
     private
 
     def photo_params
-        params.require(:photo).require(:caption, :star, :images, :dog_id)
+        params.require(:photo).permit(:caption, :star, :dog_id, :image_file) 
     end
+
+    def current_dog
+        current_dog = current_user.dogs.find_by_id params[:dog_id]
+        
+    end
+
+    # def set_photo
+    #     @photo = 
+    # end
 end

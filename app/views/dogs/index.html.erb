@@ -3,6 +3,7 @@
     <% @dogs.each do |d|  %>
         <p> 
         <%= link_to d.name, dog_path(@dogs) %>
+        <br>
         </p>
     <%end %>
 <br>

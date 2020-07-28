@@ -2,58 +2,61 @@ class DogsController < ApplicationController
     # before_action :set_dog
 
     def index
-        if current_user 
-            @dogs = current_user.dogs  
-        else 
-            @dogs = Dog.all
-        end
+      
+      if current_user 
+          @dogs = current_user.dogs  
+      else 
+          @dogs = Dog.all
+      end
     end
 
     def new
-        if params[:user_id] && @user = User.find_by_id(params[:user_id])
-          @post = @user.posts.build
-        else
-          @post = Post.new
-        end
+        @user = current_user
+        @dog = Dog.new
     end
 
     def show
-        @dog = Dog.find(params[:id])
+        # @dog = Dog.find_by(params[:id])
+        @dog = current_user.dogs.find_by_id(params[:id])
+
+        # byebug
     end
 
     def create
-        @dog = current_user.dogs.build(dog_params)
-        # @dog.user = current_user
-        @dog.save
+        @dog = Dog.new(dog_params)
+        @dog.user_id = current_user.id 
+        # @dog = current_user.dogs.build(dog_params)
+        if @dog.save
            flash[:notice] = "Dog saved"
-           redirect_to dogs_path(@dog)
-           
-        # else
-            # render :new
-        # end
+           redirect_to dog_path(@dog)          
+        else
+            # @dog.build_user unless @dog.user
+            render :new
+        end
     end
 
     def edit
-        @dog = Dog.find(params[:id])
+        @dog = current_user.dogs.find_by(params[:id])
     end
 
     def update
-        @dog = Dog.find(params[:id])
+        @dog = current_user.dogs.find_by(params[:id])
         @dog.update(dog_params)
         redirect_to dog_path(@dog)
     end 
 
 
     def destroy
-        @dog = Dog.find_by(params[:id])
+        @dog = current_user.dogs.find_by(params[:id])
         @dog.destroy 
         redirect_to user_path(current_user)
+        
     end 
 
     private
 
     def dog_params
-        params.require(:dog).permit(:name, :age, :breed, :hobbies, :bio, :user_id)
+        params.require(:dog).permit(:name, :age, :breed, :hobbies, :bio, :dog_avatar, :user_id)
     end
 
     # def set_dog

@@ -13,10 +13,20 @@ Hobbies: <%= @dog.hobbies %>
 <br>
 Bio: <%= @dog.bio %>
 <br> 
+<br>
+<br>
 
-<%# <% end %>
+<br> 
+
+    <%= link_to "See Photo", dog_photos_path(@dog) %>
+<br>
+
+<br>
+<br>
+<br>
 <%= link_to 'Edit', edit_dog_path(@dog) %>
-
-<%# <%= link_to 'Delete', dog_path(@dog), method: :delete %> 
+<br>
+<br>
+<%= link_to 'Delete', dog_path(@dog), method: :delete %> 
 
 
