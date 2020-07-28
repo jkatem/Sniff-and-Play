@@ -1,3 +1,5 @@
+<% if logged_in? && (@dog.user == current_user) %> 
+
 <h1> List of photos of <%= @dog.name %> </h1>
 <ul>
   <% @photos.each do |photo| %>
@@ -6,14 +8,11 @@
         <% if photo.image_file.attached? %>
         <span style="color:#1c87c9"><%= photo.caption %></span> </p>
           <%= image_tag(photo.image_file, width: 128) %>
-          <%= link_to "Delete Picture", dog_photos_path(@dog), method: :delete %>
           <% else %>
             "No Photo"
         <% end %>
       </div>
     </li>
-              <%= link_to "Delete Picture", dog_photos_path(@dog), method: :delete %>
-
   <% end %>
 </ul>
 <br>
@@ -22,5 +21,22 @@
 <% end %>  
 <br> 
 <%= link_to "Done", dog_path(@dog) %> 
+
+<%# comment section %>
+
+<%=form_with model: [@photo, Comment.new ] do |f|%>
+<h5>Enter your comment below ↓</h5>
+<strong><%=f.text_field :content, placeholder: "type your comment on this line"%> </strong>
+
+<%=f.submit "comment"%>
+<br>
+<br>
+<br>
+<%end%>
+
+<% else%> 
+    <h1>not your page</h1>
+<%end %>
+
 
 
