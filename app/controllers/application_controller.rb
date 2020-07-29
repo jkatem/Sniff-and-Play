@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
   # before_action :require_login
 
-  helper_method :current_user
-  helper_method :logged_in?
+  helper_method :current_user, :logged_in?
 
- private
+ 
  
  # Finds the User with the ID stored in the session with the key
  # :current_user_id This is a common way to handle user login in

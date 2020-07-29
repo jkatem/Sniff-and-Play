@@ -4,7 +4,10 @@ class PhotosController < ApplicationController
     
     def index
         # byebug
+     
       @dog = Dog.find_by_id params[:dog_id]
+      @photo = 
+      @comment = 
       if @dog 
         @photos = @dog.photos  
       end
@@ -28,20 +31,11 @@ class PhotosController < ApplicationController
         @photo = current_dog.photos.find_by_id(params[:id])
     end
 
-    def edit
-
-    end
-    
-    def update
-
-    end
-
     def destroy
-        @dog = Dog.find_by_id params[:dog_id]
-        if @dog 
-            @dog.destroy
-            redirect_to dog_photos_path(@dog)
-        end 
+        @dog = Dog.find_by(params[:dog_id])
+        @dog.destroy
+        redirect_to dog_photos_path(@dog) 
+        # byebug    
     end
 
     private

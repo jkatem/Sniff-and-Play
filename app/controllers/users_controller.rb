@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     def new
         @user = User.new
-        @dog = Dog.new
+        # @dog = Dog.new
     end
 
     def show

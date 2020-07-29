@@ -21,10 +21,7 @@ Bio: <%= @dog.bio %>
     <%= link_to "See Photo", dog_photos_path(@dog) %>
 <br>
 
-<br>
-<br>
-<br>
-<%= link_to 'Edit', edit_dog_path(@dog) %>
+<%= link_to 'Edit', edit_user_dog_path(@dog) %>
 <br>
 <br>
 <%= link_to 'Delete', dog_path(@dog), method: :delete %> 

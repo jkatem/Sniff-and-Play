@@ -1,11 +1,20 @@
+<% if logged_in? && (current_user == @user) %>
+
 <h1>Welcome <%=@user.name %></h1>
 
-<%@user.dogs.each do |dog| %>
-    <%= link_to dog.name, dog_path(dog) %>
-<% end %>
+    
+    <%# <%@user.dogs.each do |dog| %> 
+    <%@user.dogs.sort_name.each do |dog| %>
+        <%= link_to dog.name, dog_path(dog) %>
+    <% end %>
 
 <br>
-<%= link_to 'Create your dog profile', new_dog_path(@dog) %>
+<%= link_to 'Create your dog profile', new_user_dog_path(@user) %>
+<% else %>
+
+    <h1> kfjslkjf </h1>
+
+<% end %>
 
 
 

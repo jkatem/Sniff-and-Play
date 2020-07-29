@@ -1,25 +1,22 @@
 class DogsController < ApplicationController
     # before_action :set_dog
 
-    def index
+    # def index
       
-      if current_user 
-          @dogs = current_user.dogs  
-      else 
-          @dogs = Dog.all
-      end
-    end
+    #   if current_user 
+    #       @dogs = current_user.dogs  
+    #   else 
+    #       @dogs = Dog.all
+    #   end
+    # end
 
     def new
-        @user = current_user
         @dog = Dog.new
     end
 
     def show
-        # @dog = Dog.find_by(params[:id])
         @dog = current_user.dogs.find_by_id(params[:id])
 
-        # byebug
     end
 
     def create

@@ -16,11 +16,8 @@
     <%= f.label :Bio %>
     <%= f.text_field :bio %>
     <br>
-    <%= image_tag(@dog.dog_avatar, height: '150', width:'150') if @dog.dog_avatar.attached?%>
-    <br>
-    <br>
-    <%= f.label :dog_avatar %>
-    <%= f.file_field :dog_avatar %>
+
+
 
     <%= f.submit %>
 <br>

@@ -1,6 +1,6 @@
 <h1> Create Dog Profile </h1>
 
-<%= form_for @dog do |f| %>
+<%= form_for @dog, url: { action: "create" } do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %><br>
     <%= f.label :age %>
