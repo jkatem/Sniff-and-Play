@@ -2,11 +2,11 @@ class UsersController < ApplicationController
     
     def new
         @user = User.new
-        # @dog = Dog.new
+        @dog = Dog.new
     end
 
     def show
-        @user = User.find_by_id(params[:id])
+        @user = User.find(params[:id])
     end
 
     def create
@@ -14,12 +14,15 @@ class UsersController < ApplicationController
         if @user.save
             session[:user_id] = @user.id
             flash[:msg] = "Logged in successfully"
-            redirect_to user_path(@user)
+            redirect_to user_url(@user)
         else
             render :new 
         end
     end
    
+    def photos
+      @photos = current_user.photos
+    end
 
     private
 

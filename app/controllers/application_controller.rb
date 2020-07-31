@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # before_action :require_login
 
   helper_method :current_user, :logged_in?
-
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
  
  
  # Finds the User with the ID stored in the session with the key
@@ -34,4 +34,7 @@ class ApplicationController < ActionController::Base
     redirect_to '/' if !logged_in?
  end
 
+  def record_not_found(err)
+    redirect_to :root, notice: err
+  end
 end

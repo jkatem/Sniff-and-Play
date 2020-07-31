@@ -21,11 +21,14 @@ class SessionsController < ApplicationController
   end
 
   def omniauth 
-    # byebug
-    @user = User.from_omniauth(auth) # method called is from our user model 
+    @user = User.create_by_google_omniauth(auth)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else
+      redirect_to '/'
+    end
     
-    session[:user_id] = user.id
-    redirect_to login_path(user) 
   end
 
   private

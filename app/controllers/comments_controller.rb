@@ -5,18 +5,24 @@ class CommentsController < ApplicationController
     def create
         
  # find photo by params photo_id
-        @photo = Photo.find_by_id(params[:photo_id])
+        @photo = Photo.find(params[:photo_id])
         # create/build comment for photo 
         # also set user info
         comment = Comment.new(comment_params)
         comment.photo_id = @photo.id 
         comment.dog_id = @photo.dog_id
         comment.user_id = Dog.find(@photo.dog_id).user_id
-        comment.save
-
+        # begin
+         comment.save
+        # rescue ActiveRecord::RecordInvalid => e
+        #   flash[:error] = e.message
+        # end
         redirect_back(fallback_location: root_path)
     end
 
+    def user_create
+      comment = Comment.new(comment_params)
+    end
 
     private
 

@@ -15,15 +15,13 @@ Bio: <%= @dog.bio %>
 <br> 
 <br>
 <br>
-
-<br> 
-
-    <%= link_to "See Photo", dog_photos_path(@dog) %>
+<%= link_to "See Photo", user_dog_photos_path(@user, @dog) %>
 <br>
-
-<%= link_to 'Edit', edit_user_dog_path(@dog) %>
+<%= link_to 'Edit', edit_user_dog_path(@user, @dog) %>
+<br>
+<%= link_to 'Delete', user_dog_delete_path(@user, @dog), method: :delete %>
 <br>
 <br>
-<%= link_to 'Delete', dog_path(@dog), method: :delete %> 
+<%= link_to 'Done', user_path(@user) %>
 
 

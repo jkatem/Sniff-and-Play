@@ -1,64 +1,59 @@
 class DogsController < ApplicationController
-    # before_action :set_dog
 
-    # def index
-      
-    #   if current_user 
-    #       @dogs = current_user.dogs  
-    #   else 
-    #       @dogs = Dog.all
-    #   end
-    # end
+    # before_action :delete_photo, only: [:destroy]
+    before_action :set_user
+    before_action :set_dog, only: [:show, :edit, :update, :destroy]
+
+    def index
+      if @user 
+          @dogs = @user.dogs.sort_name
+      else 
+          @dogs = Dog.all
+      end
+    end
 
     def new
         @dog = Dog.new
     end
 
     def show
-        @dog = current_user.dogs.find_by_id(params[:id])
-
     end
 
     def create
         @dog = Dog.new(dog_params)
         @dog.user_id = current_user.id 
-        # @dog = current_user.dogs.build(dog_params)
         if @dog.save
-           flash[:notice] = "Dog saved"
-           redirect_to dog_path(@dog)          
+          redirect_to user_dog_url(@user, @dog)       
+         
         else
-            # @dog.build_user unless @dog.user
-            render :new
+          render :new
         end
     end
 
     def edit
-        @dog = current_user.dogs.find_by(params[:id])
     end
 
     def update
-        @dog = current_user.dogs.find_by(params[:id])
         @dog.update(dog_params)
-        redirect_to dog_path(@dog)
+        redirect_to user_dog_url(@user, @dog)
     end 
 
-
     def destroy
-        @dog = current_user.dogs.find_by(params[:id])
         @dog.destroy 
-        redirect_to user_path(current_user)
-        
+        redirect_to user_url(@user)
     end 
 
     private
 
     def dog_params
-        params.require(:dog).permit(:name, :age, :breed, :hobbies, :bio, :dog_avatar, :user_id)
+        params.require(:dog).permit(:name, :age, :breed, :hobbies, :bio, :user_id)
     end
 
-    # def set_dog
-    #     @dog = Dog.find_by(params[:id])
-    # end
+    def set_user
+      @user = current_user
+    end
 
-
+    def set_dog
+      @dog = @user.dogs.find(params[:id])
+    end
 end

@@ -1,0 +1,19 @@
+
+<h2> <%=current_user.name %>'s Photos: </h2> 
+<% if @photos.empty? %>
+  No Photo!
+<% else %>  
+  <ul>
+    <% @photos.each do |p|  %>
+      <li>
+        <% if p.image_file.attached? %>
+          <span style="color:#1c87c9"><%= p.caption %></span> </p>
+          <%= image_tag(p.image_file, width: 128) %>
+        <% end %> 
+      </li>
+    <%end %>  
+  </ul>
+<% end %>  
+<br>
+<br>
+<%= link_to "Done", :back %>

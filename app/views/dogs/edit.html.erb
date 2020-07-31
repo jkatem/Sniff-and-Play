@@ -1,6 +1,6 @@
 <h1>Dog's edit page </h1>
 
-<%= form_for @dog do |f| %>
+<%= form_for @dog, url: { action: "update"} do |f| %>
     <%= f.label :Name %>
     <%= f.text_field :name %>
     <br>
@@ -16,9 +16,10 @@
     <%= f.label :Bio %>
     <%= f.text_field :bio %>
     <br>
-
-
-
-    <%= f.submit %>
+    <br>
+    <%= f.submit "Update" %>
+    <br>
+    <br>
+    <%= link_to "Cancel", user_dog_path(@user, @dog) %>
 <br>
 <% end %>

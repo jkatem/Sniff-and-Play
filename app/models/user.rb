@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :dogs
+    has_many :dogs, dependent: :destroy
     has_many :comments
     has_many :photos, through: :comments
     
@@ -11,4 +11,10 @@ class User < ApplicationRecord
          
     has_secure_password
 
+    def self.create_by_google_omniauth(auth)
+      self.find_or_create_by(name: auth[:info][:email]) do |u|
+        u.email = auth[:info][:email]
+        u.password = SecureRandom.hex
+      end
+    end
 end

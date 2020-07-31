@@ -1,23 +1,21 @@
 Rails.application.routes.draw do
 
   resources :users, only: [:show, :create, :new] do 
-    resources :dogs, only: [:new, :create, :show, :index, :edit, :deestroy]
-  end 
-
-  resources :dogs, only: [:show] do
-    # resources :photos, shallow: true #, only: [:new, :create, :show, :index, :edit]
-    resources :photos, only: [:new, :create, :show, :index] 
-
+    resources :dogs, only: [:new, :create, :index, :edit, :show, :update]
+    resources :dogs, only: [:show] do
+      resources :photos, only: [:new, :create, :show, :index]
+    end
   end
+  get '/users/:user_id/photos', :to => 'users#photos', :as => 'user_photos'
+
+  delete '/users/:user_id/dogs/:id', :to => 'dogs#destroy', :as => 'user_dog_delete'
 
   resources :photos, only: [:show] do 
     resources :comments, only: [:new, :create, :edit, :destroy, :update]
   end
 
-  # maye use singular resources:
-    # resource :photo
-
-  # delete '/dogs/:dog_id/photos/:photo_id' => 'photos#destroy', :as => ''
+  post '/users/:user_id/comments' => 'comments#user_create', :as => 'create_user_comment'
+  get '/auth/google_oauth2/callback' => 'sessions#omniauth'
   
   root 'homepage#home'
 

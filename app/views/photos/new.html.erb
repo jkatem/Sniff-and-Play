@@ -2,15 +2,17 @@
 
 <%= form_for @photo, url: { action: "create" } do |f| %>
 
-    <%= f.label :image_file %>
-    <%= f.file_field :image_file %>
+  <%= f.label :image_file %>
+  <%= f.file_field :image_file %>
 
-    <p>
-    <%= f.label :caption %>
-    <%= f.text_field :caption %>
-    </P>
-
-    <%= f.submit "Upload"%>
+  <p>
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+  </P>
+  <%= f.submit "Upload" %>
+  <br>
+  <br>
+  <%= link_to "Cancel", :back %>
 <% end %>
 
 
