@@ -2,10 +2,11 @@ class UsersController < ApplicationController
     
     def new
         @user = User.new
-        @dog = Dog.new
+        # @dog = Dog.new
     end
 
     def show
+        @photos = current_user.photos
         @user = User.find(params[:id])
     end
 
@@ -21,8 +22,12 @@ class UsersController < ApplicationController
     end
    
     def photos
-      @photos = current_user.photos
-    end
+        @photos_with_comment = current_user.photos
+        user = User.find(params[:user_id])
+        dog_ids = User.find(user.id).dog_ids
+        all_photos = Photo.where("dog_id": dog_ids)
+        @photos_without_comment = all_photos - @photos_with_comment
+      end
 
     private
 

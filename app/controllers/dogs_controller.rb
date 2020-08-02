@@ -1,6 +1,5 @@
 class DogsController < ApplicationController
 
-    # before_action :delete_photo, only: [:destroy]
     before_action :set_user
     before_action :set_dog, only: [:show, :edit, :update, :destroy]
 
@@ -17,6 +16,7 @@ class DogsController < ApplicationController
     end
 
     def show
+
     end
 
     def create

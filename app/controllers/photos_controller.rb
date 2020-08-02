@@ -4,7 +4,6 @@ class PhotosController < ApplicationController
     before_action :set_dog
 
     def index     
-      # @dog = Dog.find params[:dog_id]
       if @dog 
         @photos = @dog.photos  
       end
@@ -28,17 +27,10 @@ class PhotosController < ApplicationController
         @photo = @dog.photos.find(params[:id])
     end
 
-    # def destroy
-    #     @dog = Dog.find_by(params[:dog_id])
-    #     @dog.destroy
-    #     redirect_to dog_photos_path(@dog) 
-    #     # byebug    
-    # end
-
     private
 
     def photo_params
-        params.require(:photo).permit(:caption, :star, :dog_id, :image_file) 
+        params.require(:photo).permit(:caption,:dog_id, :image_file) 
     end
 
     def set_dog
@@ -48,7 +40,5 @@ class PhotosController < ApplicationController
     def set_user
       @user = current_user
     end
-    # def set_photo
-    #     @photo = 
-    # end
+
 end

@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       resources :photos, only: [:new, :create, :show, :index]
     end
   end
-  get '/users/:user_id/photos', :to => 'users#photos', :as => 'user_photos'
 
   delete '/users/:user_id/dogs/:id', :to => 'dogs#destroy', :as => 'user_dog_delete'
 

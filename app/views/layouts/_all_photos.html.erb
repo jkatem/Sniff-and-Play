@@ -1,0 +1,45 @@
+<ul>
+  <% photos.each do |photo| %>
+    <% comments = photo.comments %>
+    <% comment_text = '' %>
+    <% if comments.count > 0 %>
+      <% comments.each.with_index(1) do |cmt, idx| %>
+        <% if cmt.content.length > 0 %>
+          <% if idx == 1 %>
+            <% comment_text = "#{idx}. " + cmt.content %> 
+          <% else %>
+          <% comment_text = comment_text + "&#13;&#10;#{idx}. "+ cmt.content %> 
+          <% end %>   
+        <% end %>
+      <% end %>
+      <% else %>
+        <% comment_text ="No Comment Yet!" %>
+      <% end %> 
+    <li>
+      <div>
+        <% if photo.image_file.attached? %>
+          <span style="color:#1c87c9"><%= photo.caption %></span> </p>
+          <div style="height: 165px;width: 360px;">
+            <span style="display: inline-block"><%= image_tag(photo.image_file, width: 128) %></span>
+            <div style="display: inline-block;height: 100%;width: 62%;" ><textarea style="display: inline-block;height: 75%;width: 75%;"><%= comment_text.html_safe() %></textarea></div>
+          </div>
+          <% if allow_add_comment %>
+            <% new_comment = Comment.new %>
+            <%=form_with model: new_comment, url: photo_comments_path(photo) do |f|%>
+
+            <%= render partial: 'layouts/errors', locals: {object: new_comment} %>
+
+              <h5>Enter your comment below ↓</h5>
+              <strong><%=f.text_field :content,size: 50, placeholder: "type your comment on this line"%> </strong>
+              <%= f.submit "comment" %>
+            <% end %>
+          <% end %>  
+        <% else %>
+            "No Photo"
+        <% end %>
+      </div>
+    </li>
+    <br>
+  <% end %>
+</ul>
+<br>
