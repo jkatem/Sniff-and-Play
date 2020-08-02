@@ -35,6 +35,6 @@ class ApplicationController < ActionController::Base
  end
 
   def record_not_found(err)
-    redirect_to :root, notice: err
+    redirect_to '/', notice: err
   end
 end
