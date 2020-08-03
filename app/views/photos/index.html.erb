@@ -1,17 +1,18 @@
 <% if logged_in? && (@dog.user == current_user) %> 
 
-<h1> Photos of <%= @dog.name %> </h1>
+<h1> List of photos of <%= @dog.name %> </h1>
+<%= render partial: 'layouts/commented_photos', locals: {photos: @photos, allow_add_comment: true} %>
 
-<%= render partial: 'layouts/all_photos', locals: {photos: @photos, allow_add_comment: true} %>
-
-<%= link_to "Add More Photo", new_user_dog_photo_path(@user, @dog) %> 
+<% if @dog.photos.count < 5 %>
+  <%= link_to "Add More Photo", new_user_dog_photo_path(@user, @dog) %> 
+<% end %>  
 <br>
 <br>  
-<%= link_to "Done", user_path(@user) %> 
+<%= link_to "Done", user_dog_path(@user, @dog) %> 
 <br>
 <br>
 <br>
-<% else%> 
+<% else %> 
     <h1>not your page</h1>
 <%end %>
 

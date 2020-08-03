@@ -1,23 +1,25 @@
+
 <% if logged_in? && (current_user == @user) %>
 
-<h1>Welcome <%=@user.name %></h1>
+<h1> Welcome <%=@user.name %></h1>
 <h2> Your Dogs: </h2>
   <% @user.dogs.sort_name.each do |dog| %>
     <%= link_to dog.name, user_dog_path(@user, dog) %>
     <br>
   <% end %>
+
 <br>
 <br>
 <br>
 
-<h4> Commented Photos </h4>
+<h4> Your Commented Photos: </h4>
 
-<%= render partial: 'layouts/all_photos', locals: {photos: @photos, allow_add_comment: false} %>
+<%= render partial: 'layouts/commented_photos', locals: {photos: @photos, allow_add_comment: false} %>
 
 
-| <%= link_to 'Create Your Dog Profile', new_user_dog_path(@user) %>
-
- 
+<%= link_to 'Create Your Dog Profile', new_user_dog_path(@user) %>
+  
 <%end%>
+
 
     

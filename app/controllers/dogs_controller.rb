@@ -3,33 +3,38 @@ class DogsController < ApplicationController
     before_action :set_user
     before_action :set_dog, only: [:show, :edit, :update, :destroy]
 
+    def index
+      if @user 
+          @dogs = @user.dogs.sort_name
+      else 
+          @dogs = Dog.all
+      end
+    end
+
     def new
         @dog = Dog.new
     end
 
     def show
-
     end
 
     def create
         @dog = Dog.new(dog_params)
         @dog.user_id = current_user.id 
         if @dog.save
-          redirect_to user_dog_url(@user, @dog)  
+          redirect_to user_dog_url(@user, @dog)       
+         
         else
           render :new
         end
-    end
+    
 
     def edit
     end
 
     def update
-      if @dog.update(dog_params)
-        redirect_to user_dog_url(@user, @dog)     
-      else
-        render :edit
-      end
+        @dog.update(dog_params)
+        redirect_to user_dog_url(@user, @dog)
     end 
 
     def destroy
@@ -44,7 +49,7 @@ class DogsController < ApplicationController
     end
 
     def set_user
-      @user = current_user
+      @user = User.find(params[:user_id])
     end
 
     def set_dog

@@ -1,11 +1,6 @@
-
-
-<h1>Edit your dog </h1>
-
- <%= render partial: 'layouts/errors', locals: {object: @dog} %>
+<h1>Dog's edit page </h1>
 
 <%= form_for @dog, url: { action: "update"} do |f| %>
-
     <%= f.label :Name %>
     <%= f.text_field :name %>
     <br>

@@ -1,3 +1,4 @@
+
 <ul>
   <% photos.each do |photo| %>
     <% comments = photo.comments %>
@@ -21,7 +22,7 @@
           <span style="color:#1c87c9"><%= photo.caption %></span> </p>
           <div style="height: 165px;width: 360px;">
             <span style="display: inline-block"><%= image_tag(photo.image_file, width: 128) %></span>
-            <div style="display: inline-block;height: 100%;width: 62%;" ><textarea style="display: inline-block;height: 75%;width: 75%;"><%= comment_text.html_safe() %></textarea></div>
+            <div style="display: inline-block;height: 100%;width: 62%;" ><textarea style="display: inline-block;height: 100%;width: 100%;"><%= comment_text.html_safe() %></textarea></div>
           </div>
           <% if allow_add_comment %>
             <% new_comment = Comment.new %>

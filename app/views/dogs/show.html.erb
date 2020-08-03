@@ -1,5 +1,8 @@
 
-<div>
+<%# <% if @dog.empty? %> 
+    <%# <h1> Do something</h1> %>
+<%# <% else %> 
+
 Name: <%= @dog.name %>
 <br>
 Age: <%= @dog.age %>
@@ -9,11 +12,10 @@ Breed: <%= @dog.breed %>
 Hobbies: <%= @dog.hobbies %>
 <br>
 Bio: <%= @dog.bio %>
-</div>
 <br> 
 <br>
 <br>
-<%= link_to "See Photos", user_dog_photos_path(@user, @dog) %>
+<%= link_to "See Photo", user_dog_photos_path(@user, @dog) %>
 <br>
 <%= link_to 'Edit', edit_user_dog_path(@user, @dog) %>
 <br>

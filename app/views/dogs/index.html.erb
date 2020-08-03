@@ -1,0 +1,10 @@
+
+<h2> Dog List </h2> 
+    <% @dogs.each do |d|  %>
+      <br>
+        <%= link_to d.name, user_dog_path(@user, d) %>
+    <%end %>
+<br>
+<br>
+
+<%= link_to 'Create your dog profile', new_user_dog_path(@user, @dog) %>
