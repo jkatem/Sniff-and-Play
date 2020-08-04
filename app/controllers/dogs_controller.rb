@@ -15,7 +15,6 @@ class DogsController < ApplicationController
         @dog.user_id = current_user.id 
         if @dog.save
           redirect_to user_dog_url(@user, @dog)       
-         
         else
           render :new
         end
