@@ -3,8 +3,8 @@ class User < ApplicationRecord
     has_many :comments
     has_many :photos, through: :comments
     
-
-
+    validates :name, presence: true
+    
     validates :email, presence: true, 
         uniqueness: { case_sensitive: false }, 
         length: { maximum: 105 }

@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
     before_action :set_comment, only: [:edit, :destroy, :update, :show]
    
     def create
-        
         @photo = Photo.find(params[:photo_id])
         comment = Comment.new(comment_params)
         comment.photo_id = @photo.id 

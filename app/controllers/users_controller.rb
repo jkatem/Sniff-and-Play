@@ -6,8 +6,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @photos = current_user.photos
-
+        @photos = current_user.photos.uniq
         @user = User.find(params[:id])
     end
 
@@ -18,17 +17,11 @@ class UsersController < ApplicationController
             flash[:msg] = "Logged in successfully"
             redirect_to user_url(@user)
         else
+            flash[:errors] = @user.errors.full_messages
             render :new 
         end
     end
    
-    def photos
-      @photos_with_comment = current_user.photos
-      user = User.find(params[:user_id])
-      dog_ids = User.find(user.id).dog_ids
-      all_photos = Photo.where("dog_id": dog_ids)
-      @photos_without_comment = all_photos - @photos_with_comment
-    end
 
     private
 
